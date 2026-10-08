@@ -10,6 +10,12 @@
 
 # 🌀 PIMX PORTAL
 
+<!-- pimx-live-site:start -->
+## وب‌سایت آنلاین
+
+**[مشاهدهٔ PIMX_PORTAL ↗](https://pimxportal.pages.dev/)**
+<!-- pimx-live-site:end -->
+
 فهرست تصویری دوزبانه مجموعه PIMX؛ پوسترهای اختصاصی، بازدیدکننده را به ابزارها و بخش حمایت هدایت می‌کنند.
 
 [GitHub](https://github.com/MOHAMMADREZAABEDINPOOR/PIMX_PORTAL) · [PIMX / Profile](https://github.com/MOHAMMADREZAABEDINPOOR) · [بنر ثابت](assets/readme/hero.png)
