@@ -8,6 +8,12 @@
 
 # 🌀 PIMX PORTAL
 
+<!-- pimx-live-site:start -->
+## Live website
+
+**[Open PIMX_PORTAL ↗](https://pimxportal.pages.dev/)**
+<!-- pimx-live-site:end -->
+
 A bilingual visual directory for the PIMX ecosystem. Distinct project posters lead visitors to individual tools and a support destination.
 
 [GitHub](https://github.com/MOHAMMADREZAABEDINPOOR/PIMX_PORTAL) · [PIMX / Profile](https://github.com/MOHAMMADREZAABEDINPOOR) · [Static artwork](assets/readme/hero.png)
