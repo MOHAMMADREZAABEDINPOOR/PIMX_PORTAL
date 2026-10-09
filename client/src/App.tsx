@@ -1,4 +1,4 @@
-/** PIMX PLAYGROUND INDEX — light paper theme is part of the deliberate print-poster direction. */
+/** PIMX PLAYGROUND INDEX — switchable light and dark poster themes. */
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -20,7 +20,7 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider defaultTheme="light" switchable>
         <TooltipProvider><Toaster /><Router /></TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

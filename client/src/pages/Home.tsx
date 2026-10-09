@@ -3,10 +3,11 @@
  * English leads by default; Persian mirrors the reading direction while preserving the print-poster system.
  */
 import { useEffect, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, Heart, Languages, MoveUpRight, Sparkles } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Heart, Languages, Moon, MoveUpRight, Sparkles, Sun } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type Language = "en" | "fa";
-type Role = "portfolio" | "satellite" | "converter" | "archive" | "dns" | "textArt" | "vault" | "transfer" | "secure";
+type Role = "portfolio" | "satellite" | "converter" | "archive" | "dns" | "textArt" | "vault" | "transfer" | "secure" | "agent" | "eltex" | "weather" | "portal";
 
 type Project = {
   name: string;
@@ -27,21 +28,25 @@ const projects: Project[] = [
   { name: "PIMX VEIL", href: "https://pimxveil.pages.dev", no: "07", role: "vault", className: "poster--mint", icon: "wave" },
   { name: "PIMX NODE", href: "https://pimxnode.pages.dev", no: "08", role: "transfer", className: "poster--yellow", icon: "node" },
   { name: "PIMX WIDE", href: "https://pimxwide.pages.dev", no: "09", role: "secure", className: "poster--ink", icon: "wide" },
+  { name: "PIMX AGENT", href: "https://pimxagent.pages.dev", no: "10", role: "agent", className: "poster--blue", icon: "node" },
+  { name: "PIMX ELTEX", href: "https://pimxeltex.pages.dev", no: "11", role: "eltex", className: "poster--purple", icon: "grid" },
+  { name: "PIMX WEATHER", href: "https://pimx-weather.pages.dev", no: "12", role: "weather", className: "poster--yellow", icon: "star" },
+  { name: "PIMX PORTAL", href: "https://pimxportal.pages.dev", no: "13", role: "portal", className: "poster--mint", icon: "ring" },
 ];
 
 const dictionary = {
   en: {
-    lang: "en", dir: "ltr", switchTo: "Switch to فارسی", brandIndex: "PIMX INDEX", projects: "PROJECTS", support: "SUPPORT", openPimx: "OPEN PIMX",
+    lang: "en", dir: "ltr", darkTheme: "Switch to dark theme", lightTheme: "Switch to light theme", switchTo: "Switch to فارسی", brandIndex: "PIMX INDEX", projects: "PROJECTS", support: "SUPPORT", openPimx: "OPEN PIMX",
     heroLabel: "AN INDEPENDENT CORNER OF THE WEB", heroKicker: <>A digital shelf for<br />the things I make.</>, heroTitle: <>Every path,<br /><span>one</span> PIMX.</>, heroLink: "Browse the index", heroScroll: "SCROLL TO PICK A PATH",
     destinations: "independent destinations", projectTitle: <>Pick one,<br />then <i>go.</i></>, projectIntro: "This is not a plain directory; each piece is an independent experience in the PIMX world.", projectAside: <>SELECT A POSTER<br />TO OPEN A NEW ROUTE<br /><span>↘ ALL LINKS OPEN SEPARATELY</span></>,
-    open: "OPEN", roles: { portfolio: "MAIN PORTFOLIO", satellite: "ORBIT TRACKER", converter: "FILE CONVERTER", archive: "LESSON ARCHIVE", dns: "DNS TOOL", textArt: "TEXT ART LAB", vault: "PRIVATE VAULT", transfer: "P2P TRANSFER", secure: "SECURE SPACE" },
+    open: "OPEN", roles: { portfolio: "MAIN PORTFOLIO", satellite: "ORBIT TRACKER", converter: "FILE CONVERTER", archive: "LESSON ARCHIVE", dns: "DNS TOOL", textArt: "TEXT ART LAB", vault: "PRIVATE VAULT", transfer: "P2P TRANSFER", secure: "SECURE SPACE", agent: "AGENT", eltex: "ELTEX", weather: "WEATHER", portal: "PROJECT PORTAL" },
     supportStamp: "ONE SMALL SIGNAL", supportLabel: "PIMX SUPPORT DESK", supportTitle: <>If a tool<br />helped you, <i>back it.</i></>, supportCopy: "Your support gives the next PIMX routes more time and energy to be built.", supportAction: "OPEN SUPPORT PAGE", ticket: "SUPPORT\nTICKET", thankYou: "THANK YOU", footer: "PIMX PLAYGROUND INDEX / 2026", backTop: "BACK TO THE TOP ↑",
   },
   fa: {
-    lang: "fa", dir: "rtl", switchTo: "Switch to English", brandIndex: "فهرست PIMX", projects: "پروژه‌ها", support: "حمایت", openPimx: "باز کردن PIMX",
+    lang: "fa", dir: "rtl", darkTheme: "فعال کردن تم تاریک", lightTheme: "فعال کردن تم روشن", switchTo: "Switch to English", brandIndex: "فهرست PIMX", projects: "پروژه‌ها", support: "حمایت", openPimx: "باز کردن PIMX",
     heroLabel: "یک گوشهٔ مستقل از وب", heroKicker: <>یک قفسهٔ دیجیتال برای<br />چیزهایی که ساخته‌ام.</>, heroTitle: <>هر راه،<br /><span>یک</span> Pimx.</>, heroLink: "رفتن به فهرست", heroScroll: "برای انتخاب مسیر اسکرول کن",
     destinations: "مقصد مستقل", projectTitle: <>هر کدام را<br />بردار و <i>برو.</i></>, projectIntro: "این‌جا یک منوی ساده نیست؛ هر قطعه یک تجربهٔ مستقل در جهان Pimx است.", projectAside: <>یک پوستر را انتخاب کن<br />تا مسیر تازه باز شود<br /><span>↘ همهٔ لینک‌ها جداگانه باز می‌شوند</span></>,
-    open: "باز کن", roles: { portfolio: "پورتفولیوی اصلی", satellite: "ره‌گیر مدار", converter: "تبدیل‌گر فایل", archive: "آرشیو تجربه‌ها", dns: "ابزار DNS", textArt: "آزمایشگاه متن", vault: "گاوصندوق خصوصی", transfer: "انتقال P2P", secure: "فضای امن" },
+    open: "باز کن", roles: { portfolio: "پورتفولیوی اصلی", satellite: "ره‌گیر مدار", converter: "تبدیل‌گر فایل", archive: "آرشیو تجربه‌ها", dns: "ابزار DNS", textArt: "آزمایشگاه متن", vault: "گاوصندوق خصوصی", transfer: "انتقال P2P", secure: "فضای امن", agent: "دستیار", eltex: "التکس", weather: "آب‌وهوا", portal: "درگاه پروژه‌ها" },
     supportStamp: "یک سیگنال کوچک", supportLabel: "میز حمایت PIMX", supportTitle: <>اگر یک ابزار<br />به کارت آمد، <i>دستش را بگیر.</i></>, supportCopy: "حمایت تو، زمان و انرژی بیشتری برای ساختن مسیرهای تازه در Pimx می‌سازد.", supportAction: "باز کردن صفحهٔ حمایت", ticket: "بلیت\nحمایت", thankYou: "سپاس از تو", footer: "فهرست PIMX PLAYGROUND / ۲۰۲۶", backTop: "بازگشت به بالا ↑",
   },
 } as const;
@@ -69,6 +74,7 @@ function Poster({ project, copy }: { project: Project; copy: Copy }) {
 }
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
   const [language, setLanguage] = useState<Language>(() => {
     if (typeof window === "undefined") return "en";
     return window.localStorage.getItem("pimx-language") === "fa" ? "fa" : "en";
@@ -93,6 +99,9 @@ export default function Home() {
         <a href="#top" className="header-logo"><Logo compact /><span>{copy.brandIndex}</span></a>
         <nav><a href="#projects">{copy.projects}</a><a href="#support">{copy.support}</a></nav>
         <div className="header-actions">
+          <button type="button" className="language-switch theme-switch" onClick={toggleTheme} aria-label={theme === "light" ? copy.darkTheme : copy.lightTheme} title={theme === "light" ? copy.darkTheme : copy.lightTheme} aria-pressed={theme === "dark"}>
+            {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
+          </button>
           <button type="button" className="language-switch" onClick={toggleLanguage} aria-label={copy.switchTo} title={copy.switchTo}><Languages size={13} /><span>{language === "en" ? "FA" : "EN"}</span></button>
           <a className="header-chip" href="https://pimx.pages.dev" target="_blank" rel="noreferrer">{copy.openPimx} <MoveUpRight size={13} /></a>
         </div>
@@ -112,7 +121,7 @@ export default function Home() {
 
       <section className="projects-section" id="projects">
         <div className="projects-intro" dir={copy.dir}>
-          <div className="section-token"><span>09</span> {copy.destinations}</div>
+          <div className="section-token"><span>{String(projects.length).padStart(2, "0")}</span> {copy.destinations}</div>
           <h2>{copy.projectTitle}</h2>
           <p>{copy.projectIntro}</p>
         </div>
@@ -134,7 +143,7 @@ export default function Home() {
           <p>{copy.supportCopy}</p>
           <a href="https://pimxsupport.pages.dev" target="_blank" rel="noreferrer" className="ticket-action"><Heart size={18} fill="currentColor" /> {copy.supportAction} <ArrowUpRight size={18} /></a>
         </div>
-        <div className="ticket-number" aria-hidden="true"><b>10</b><span>{copy.ticket}</span></div>
+        <div className="ticket-number" aria-hidden="true"><b>{String(projects.length + 1).padStart(2, "0")}</b><span>{copy.ticket}</span></div>
         <div className="ticket-side ticket-side--right"><span>{copy.thankYou}</span><span>•</span><span>{copy.thankYou}</span></div>
       </section>
 

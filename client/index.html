@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#070a0d" />
+    <meta name="theme-color" content="#f1ecdf" />
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark");
+          document.documentElement.style.colorScheme = "dark";
+          document.querySelector('meta[name="theme-color"]').content = "#17191e";
+        }
+      } catch {}
+    </script>
     <meta name="description" content="PIMXPORTAL — درگاه دوزبانه ورود به اکوسیستم پروژه‌های PIMX." />
     <title>PIMXPORTAL — PIMX Ecosystem Navigator</title>
   </head>

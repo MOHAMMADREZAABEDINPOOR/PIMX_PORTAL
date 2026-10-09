@@ -36,6 +36,8 @@ A bilingual visual directory for the PIMX ecosystem. Distinct project posters le
 |:---|:---|
 | ⚡ Workflow | Individual project posters and direct destination links |
 | 🌐 Experience | English/Persian copy with LTR/RTL layouts |
+| 🌗 Appearance | Switchable light/dark themes with saved preference |
+| 🔗 Directory | All 13 PIMX destinations with direct links |
 | ⚡ Workflow | React components with motion and responsive styling |
 | 🔌 Integration | Optional Express server for the compiled site |
 
